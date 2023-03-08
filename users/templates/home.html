@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<div class="jumbotron">
+        <h1 class="display-2">Haber Sitesi Uygulaması</h1>
+        <p class="display-6">Makale Yaz, oku ve dünyayı keşfet... </p>
+</div>
+
+{% if user.is_authenticated %}
+        <h3>Merhaba {{ user.username }}</h3>
+        <!-- <p><a class="btn btn-success" href="{% url 'logout' %}"> Çıkış </a></p> -->
+        <p class="lead">
+                <a class="btn btn-primary btn-lg " href="{% url 'article_list' %}" role="button">Bütün Makaleler</a>
+        </p>
+        
+        
+
+{% else %}
+        <h6>Lütfen giriş yapınız,Hesabınız yoksa kayıt olunuz.</h4>
+        <p><a class="btn btn-success" href="{% url 'login' %}"> Giriş </a></p>
+        <p><a class="btn btn-success" href="{% url 'signup' %}"> Kaydol </a></p>
+{% endif %}
+
+
+{% endblock content %}
+
+

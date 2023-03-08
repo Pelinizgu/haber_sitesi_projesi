@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Articles{% endblock title %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1  class="display-2 " style="color: white;">Makaleler</h1>
+    </div>
+    {% for article in object_list %}
+        <div class="card">
+            <div class="card-header">
+                <span class="text-muted">created by <label style="font-weight:bold">{{ article.author }}</label> | {{ article.date }} </span>
+            </div>
+            <div class="card-body">
+                <span class="font-weight-bold"><h5>{{ article.title }}</h5>  </span>
+                <h2>{{ article.body }}</h2>
+                <a href="{% url 'article_edit' article.pk %}">Düzenle</a>
+                <span href="#">/</span>
+                <a href="{% url 'article_delete' article.pk %}">Sil</a>
+                <span href="#">/</span>
+                <a href="{% url 'article_comment' article.pk %}">yorum</a>
+            </div>
+             <div class="card-footer">
+                {% for comment in article.comments.all %}
+                    <span>
+                        <span class="">{{ comment.author }}(yorumu) &equals; </span>
+                        <p style="font-weight: bold;">{{ comment }}</p>
+                    </span>
+                {% endfor %}
+             </div>
+        </div>
+    <br>
+    {% endfor %}
+{% endblock content %}
